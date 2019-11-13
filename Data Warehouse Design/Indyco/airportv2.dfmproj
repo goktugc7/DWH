@@ -1,0 +1,51 @@
+<project name="airport" id="b5b1e7fc-b90f-47f8-9aa2-49cd201be2ed" toolversion="3.2.5.0">
+  <datawarehouse>
+    <datamarts>
+      <datamart name="AMOS" id="dd185f1b-067c-4884-a5c5-c58d2b1a5a83">
+        <factschemas>
+          <factschema id="9593f5ee-178d-4308-9081-7b63ce2ebdaf" />
+        </factschemas>
+      </datamart>
+      <datamart name="AIMS" id="8b3be266-e1cd-4205-9ee6-06f90af93610">
+        <factschemas>
+          <factschema id="bd2b1d23-5f94-4e01-88ff-7079275912e8" />
+        </factschemas>
+      </datamart>
+    </datamarts>
+  </datawarehouse>
+  <conformedHierarchies>
+    <conformedHierarchy id="2bea988a-9a1f-4c94-bddc-5a22d29db12c" />
+    <conformedHierarchy id="5602cd80-10ff-41e8-bb11-1a41a45bae31" />
+    <conformedHierarchy id="11cd947c-0dfa-406c-9b26-a1e7ebef1254" />
+  </conformedHierarchies>
+  <areas>
+    <area name="AMOS" id="5d715e7f-d9ae-4671-b029-29ca00dc5019">
+      <factSchemas>
+        <factschema id="9593f5ee-178d-4308-9081-7b63ce2ebdaf" />
+      </factSchemas>
+    </area>
+    <area name="AIMS" id="d9f922a0-d5e8-4969-8c68-8ed3965c9034">
+      <factSchemas>
+        <factschema id="bd2b1d23-5f94-4e01-88ff-7079275912e8" />
+      </factSchemas>
+    </area>
+  </areas>
+  <customProperties>
+    <attributes />
+    <measures />
+    <facts />
+  </customProperties>
+  <linkedProperties />
+  <projectOptions>
+    <logicModelingProfile name="custom" isEditable="true" RecursiveArc="UseSelfReferencingKeys" CrossDimensionalInterHierarchy="BridgeTableWithoutSurrogatesOnCrossDimensional" MultipleArcFromFact="BridgeTableWithSurrogatesAndSnowFlakeOnMultipleArcsFromFact" MultipleArcFromDimension="BridgeTableWithSurrogatesAndSnowFlakeOnMultipleArcs" MultipleArcFromAttribute="BridgeTableWithoutSurrogatesOnMultipleArcs" ArcFromFact="SnowflakeOnDimension" Default="DoNotSnowflake" SharedAttribute="Snowflake" DegenerateDimension="UseJunkTable" />
+    <logicModelingNamePrefixes DimensionTableNamePrefix="DT_" FactTableNamePrefix="FT_" BridgeTableNamePrefix="BT_" NavigationTableNamePrefix="NAV_" JunkTableNamePrefix="JT_" PrimaryKeyNamePrefix="PK_" ForeignKeyNamePrefix="FK_" TableIdNamePrefix="ID_" ConformedDimensionViewNamePrefix="DTV_" TemporalScenarioRollbackFromFieldName="FROM" TemporalScenarioRollbackToFieldName="TO" TemporalScenarioRollbackMasterFieldName="MASTER" />
+    <logicalModelingDefaultTypes>
+      <attributes name="VARCHAR" length="255" scale="-1" precision="-1" />
+      <measures name="DECIMAL" length="-1" scale="3" precision="18" />
+      <surrogates name="INT" length="-1" scale="-1" precision="-1" />
+      <temporalScenarioRollbackFromType name="DATE" length="-1" scale="-1" precision="-1" />
+      <temporalScenarioRollbackToType name="DATE" length="-1" scale="-1" precision="-1" />
+      <temporalScenarioRollbackMasterType name="INT" length="-1" scale="-1" precision="-1" />
+    </logicalModelingDefaultTypes>
+  </projectOptions>
+</project>

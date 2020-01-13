@@ -1,0 +1,91 @@
+<Schema name="acme12D3G">
+<Cube name="acme12D3G">
+<Table name="FACTS_DRILLACCROSS"/>
+<Dimension name="Aircraft" foreignKey="AIRCRAFTID">
+<Hierarchy hasAll="true" allMemberName="All Aircrafts" primaryKey="ID">
+<Table name="AIRCRAFTDIMENSION"/>
+<Level name="AircraftManufacturer" column="MANUFACTURER" uniqueMembers="false"/>
+<Level name="AircraftModel" column="MODEL" uniqueMembers="false"/>
+<Level name="AircraftID" column="ID" uniqueMembers="true"/>
+</Hierarchy>
+</Dimension>
+<Dimension name="Month" foreignKey="MONTHID">
+<Hierarchy hasAll="true" allMemberName="All Months" primaryKey="ID">
+<Table name="MONTHS"/>
+<Level name="Year" column="Y" uniqueMembers="false"/>
+<Level name="Month" column="ID" uniqueMembers="true"/>
+</Hierarchy>
+</Dimension>
+<Dimension name="Personnel" foreignKey="PERSONID">
+<Hierarchy name="Person-Role" hasAll="true" allMemberName="All Persons-Role" primaryKey="ID">
+<Table name="PEOPLEDIMENSION"/>
+<Level name="PersonRole" column="ROLE" uniqueMembers="false"/>
+<Level name="PersonID" column="ID" uniqueMembers="true"/>
+</Hierarchy>
+<Hierarchy name="Person-Airport" hasAll="true" allMemberName="All Persons-Airport" primaryKey="ID">
+<Table name="PEOPLEDIMENSION"/>
+<Level name="PersonAirport" column="AIRPORT" uniqueMembers="false"/>
+<Level name="PersonID" column="ID" uniqueMembers="true"/>
+</Hierarchy>
+</Dimension>
+<Measure name="Counter" column="COUNTER" aggregator="sum" formatString="#,###"/>
+<Measure name="FC" column="FLIGHTCYCLES" aggregator="sum" formatString="#,###"/>
+<Measure name="FH" column="FLIGHTHOURS" aggregator="sum" formatString="#,###"/>
+<Measure name="DelayMinutes" column="DELAYEDMINUTES" aggregator="sum" formatString="#,###"/>
+<Measure name="DY" column="DELAYS" aggregator="sum" formatString="#,###"/>
+<Measure name="CN" column="CANCELLATIONS" aggregator="sum" formatString="#,###"/>
+<Measure name="ADOSS" column="SCHEDULEDOUTOFSERVICE" aggregator="sum" formatString="#,###"/>
+<Measure name="ADOSU" column="UNSCHEDULEDOUTOFSERVICE" aggregator="sum" formatString="#,###"/>
+<Measure name="DT" column="DAYSTOTAL" aggregator="sum" formatString="#,###"/>
+<Measure name="PIREP" column="PIREP" aggregator="sum" formatString="#,###"/>
+<Measure name="MAREP" column="MAREP" aggregator="sum" formatString="#,###"/>
+<CalculatedMember name="ADOS" dimension="Measures" formula="[Measures].[ADOSS] + [Measures].[ADOSU]">
+<CalculatedMemberProperty name="FORMAT_STRING" value="#,###"/>
+</CalculatedMember>
+<CalculatedMember name="ADIS" dimension="Measures" formula="[Measures].[DT] - [Measures].[ADOSS] - [Measures].[ADOSU]">
+<CalculatedMemberProperty name="FORMAT_STRING" value="#,###"/>
+</CalculatedMember>
+<CalculatedMember name="DU" dimension="Measures" formula="[Measures].[FH] / [Measures].[ADIS]">
+<CalculatedMemberProperty name="FORMAT_STRING" value="#,###"/>
+</CalculatedMember>
+<CalculatedMember name="DC" dimension="Measures" formula="[Measures].[FC] / [Measures].[ADIS]">
+<CalculatedMemberProperty name="FORMAT_STRING" value="#,###"/>
+</CalculatedMember>
+<CalculatedMember name="DYR" dimension="Measures" formula="100 * [Measures].[DY] / [Measures].[FC]">
+<CalculatedMemberProperty name="FORMAT_STRING" value="#,###"/>
+</CalculatedMember>
+<CalculatedMember name="CNR" dimension="Measures" formula="100 * [Measures].[CN] / [Measures].[FC]">
+<CalculatedMemberProperty name="FORMAT_STRING" value="#,###"/>
+</CalculatedMember>
+<CalculatedMember name="TDR" dimension="Measures" formula="100 - 100 * ([Measures].[DY] + [Measures].[CN]) / [Measures].[FC]">
+<CalculatedMemberProperty name="FORMAT_STRING" value="#,###"/>
+</CalculatedMember>
+<CalculatedMember name="AvgDD" dimension="Measures" formula="100 * [Measures].[DelayMinutes] / [Measures].[DY]">
+<CalculatedMemberProperty name="FORMAT_STRING" value="#,###"/>
+</CalculatedMember>
+<CalculatedMember name="RRh" dimension="Measures" formula="([Measures].[PIREP] + [Measures].[MAREP]) / [Measures].[FH]">
+<CalculatedMemberProperty name="FORMAT_STRING" value="#,###"/>
+</CalculatedMember>
+<CalculatedMember name="RRc" dimension="Measures" formula="([Measures].[PIREP] + [Measures].[MAREP]) / [Measures].[FC]">
+<CalculatedMemberProperty name="FORMAT_STRING" value="#,###"/>
+</CalculatedMember>
+<CalculatedMember name="PRRh" dimension="Measures" formula="[Measures].[PIREP] / [Measures].[FH]">
+<CalculatedMemberProperty name="FORMAT_STRING" value="#,###"/>
+</CalculatedMember>
+<CalculatedMember name="PRRc" dimension="Measures" formula="[Measures].[PIREP] / [Measures].[FC]">
+<CalculatedMemberProperty name="FORMAT_STRING" value="#,###"/>
+</CalculatedMember>
+<CalculatedMember name="MRRh" dimension="Measures" formula="[Measures].[MAREP] / [Measures].[FH]">
+<CalculatedMemberProperty name="FORMAT_STRING" value="#,###"/>
+</CalculatedMember>
+<CalculatedMember name="MRRc" dimension="Measures" formula="[Measures].[MAREP] / [Measures].[FC]">
+<CalculatedMemberProperty name="FORMAT_STRING" value="#,###"/>
+</CalculatedMember>
+<CalculatedMember name="MRRh1" dimension="Measures" formula="[Measures].[Counter] / [Measures].[FH]">
+<CalculatedMemberProperty name="FORMAT_STRING" value="#,###"/>
+</CalculatedMember>
+<CalculatedMember name="MRRc1" dimension="Measures" formula="[Measures].[Counter] / [Measures].[FC]">
+<CalculatedMemberProperty name="FORMAT_STRING" value="#,###"/>
+</CalculatedMember>
+</Cube>
+</Schema>
